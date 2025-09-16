@@ -1,32 +1,33 @@
 from flask import Flask, render_template, request
 
-# Initialize the Flask application
 app = Flask(__name__)
 
-# --- YOUR PYTHON LOGIC GOES HERE ---
-# For this example, let's create a simple function.
-# Replace this with your actual program's logic.
-def generate_sentence(user_input):
-    # Example: Just repeats the user's input in a sentence.
-    if not user_input:
-        return ""
-    return f"You told me this: '{user_input}'!"
-# ------------------------------------
+# --- Create your list of 100 questions here ---
+# For this example, I'll create a few and multiply them.
+# You should replace these with your actual questions.
+question_list = [
+    "Is the sky blue?",
+    "Is Python a programming language?",
+    "Is water dry?"
+    # ... add all your other questions here
+]
+# Let's make the list 100 questions long for this demo
+questions = question_list
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    # This is the default text shown on the page
-    result_sentence = ""
-
-    # This block runs when the user submits the form
+    result_text = ""
     if request.method == 'POST':
-        # Get the text from the form's input box
-        user_text = request.form.get('user_input')
-        # Run your function with the user's text
-        result_sentence = generate_sentence(user_text)
+        # This is the new logic to tally the 'yes' answers
+        score = 100
+        for value in request.form.values():
+            if value == 'yes':
+                score -= 1
+        
+        result_text = f"Your Score: {score}"
 
-    # This sends the result back to the HTML page to be displayed
-    return render_template('index.html', result=result_sentence)
+    # We pass the list of questions to the HTML template
+    return render_template('index.html', questions=questions, result=result_text)
 
 if __name__ == '__main__':
     app.run(debug=True)

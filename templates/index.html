@@ -2,23 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Simple App</title>
+    <title>Questionnaire</title>
     <style>
-        body { font-family: sans-serif; text-align: center; margin-top: 50px; }
-        input { font-size: 1.2em; }
-        button { font-size: 1.2em; margin-left: 10px; }
-        h2 { color: #007BFF; }
+        body { font-family: sans-serif; margin: 2em; }
+        .question { margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        label { margin-right: 15px; }
+        button { font-size: 1.5em; padding: 10px 20px; margin-top: 20px; }
+        h1, h2 { text-align: center; }
+        h2 { color: #3396ff; }
     </style>
 </head>
 <body>
-    <h1>USAFA Purity Score</h1>
-    <p>Answer the following questions please</p>
+    <h1>✈️USAFA Purity Test✈️</h1>
 
     <form method="post">
-        <input type="text" name="user_input" placeholder="Type here...">
-        <button type="submit">Submit</button>
+        {% for question in questions %}
+            <div class="question">
+                <p><strong>{{ loop.index }}. {{ question }}</strong></p>
+                
+                <label><input type="radio" name="q{{ loop.index0 }}" value="yes" required> Yes</label>
+                <label><input type="radio" name="q{{ loop.index0 }}" value="no"> No</label>
+            </div>
+        {% endfor %}
+        
+        <div style="text-align: center;">
+            <button type="submit">Calculate Your Score</button>
+        </div>
     </form>
-
+    
     <h2>{{ result }}</h2>
 
 </body>
