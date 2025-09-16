@@ -1,16 +1,17 @@
 from flask import Flask, render_template, request
-
+from pathlib import Path
 app = Flask(__name__)
+script_dir = Path(__file__).parent
+file_path = script_dir / "questions.txt"
 
 # --- Create your list of 100 questions here ---
 # For this example, I'll create a few and multiply them.
 # You should replace these with your actual questions.
-question_list = [
-    "Is the sky blue?",
-    "Is Python a programming language?",
-    "Is water dry?"
-    # ... add all your other questions here
-]
+question_list = []
+with open(file_path) as fil:
+    for line in fil:
+        question_list.append(str(line))
+    fil.close()
 # Let's make the list 100 questions long for this demo
 questions = question_list
 
