@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Simple App</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+        input { font-size: 1.2em; }
+        button { font-size: 1.2em; margin-left: 10px; }
+        h2 { color: #007BFF; }
+    </style>
+</head>
+<body>
+    <h1>USAFA Purity Score</h1>
+    <p>Answer the following questions please</p>
+
+    <form method="post">
+        <input type="text" name="user_input" placeholder="Type here...">
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>{{ result }}</h2>
+
+</body>
+</html>
